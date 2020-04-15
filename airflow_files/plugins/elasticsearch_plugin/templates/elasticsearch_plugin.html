@@ -1,0 +1,39 @@
+{% extends 'admin/master.html' %}
+{% import 'admin/lib.html' as lib with context %}
+{% import 'admin/static.html' as admin_static with context%}
+{% import 'admin/model/layout.html' as model_layout with context %}
+
+{% block head %}
+    {{ super() }}
+    {{ lib.form_css() }}
+{% endblock %}
+
+<!--{'name': 'UpgZp3W', 'cluster_name': 'elasticsearch', 'cluster_uuid': '3Buc1FxuRser8WiAI9EkYg', 'version': {'number': '6.4.3', 'build_flavor': 'default', 'build_type': 'rpm', 'build_hash': 'fe40335', 'build_date': '2018-10-30T23:17:19.084789Z', 'build_snapshot': False, 'lucene_version': '7.4.0', 'minimum_wire_compatibility_version': '5.6.0', 'minimum_index_compatibility_version': '5.0.0'}, 'tagline': 'You Know, for Search'}
+-->
+{% block body %}
+    <h2>Elasticsearch Dashboard</h2>
+    {% block model_menu_bar %}
+    {% endblock %}
+
+    {% if isup %}
+	<p>Elasticsearch is <b>UP</b></p>
+    {% else %}
+        <p>Elasticsearch is <b>DOWN</b></p>
+    {% endif %}
+
+    <table class="table table-striped table-bordered table-hover model-list">
+    {% for key in data %}
+    <tr>
+    	<th>{{ key }}</th>
+     	<td>{{ data[key] }}</td>
+    </tr>
+    {% endfor %}
+    </table>
+
+{% endblock %}
+
+{% block tail %}
+    {{ super() }}
+    <script src="{{ admin_static.url(filename='admin/js/filters.js') }}"></script>
+    {{ lib.form_js() }}
+{% endblock %}

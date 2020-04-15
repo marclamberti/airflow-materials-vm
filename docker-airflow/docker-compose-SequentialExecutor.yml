@@ -1,0 +1,33 @@
+version: '2.1'
+services:
+    webserver:
+        image: airflow-image:latest
+        restart: always
+        environment:
+            - LOAD_EX=n
+            - EXECUTOR=Sequential
+            - AIRFLOW__CORE__SQL_ALCHEMY_CONN=sqlite:////usr/local/airflow/db/airflow.db
+        volumes:
+            - ./dags:/usr/local/airflow/dags
+            - ./db:/usr/local/airflow/db
+        ports:
+            - "8083:8080"
+        command: webserver
+        healthcheck:
+            test: ["CMD-SHELL", "[ -f /usr/local/airflow/airflow-webserver.pid ]"]
+            interval: 30s
+            timeout: 30s
+            retries: 3
+    scheduler:
+        image: airflow-image:latest
+        restart: always
+        environment:
+            - LOAD_EX=n
+            - EXECUTOR=Sequential
+            - AIRFLOW__CORE__SQL_ALCHEMY_CONN=sqlite:////usr/local/airflow/db/airflow.db
+        depends_on:
+            - webserver
+        volumes:
+            - ./dags:/usr/local/airflow/dags
+            - ./db:/usr/local/airflow/db
+        command: scheduler
