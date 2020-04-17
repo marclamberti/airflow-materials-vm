@@ -1,0 +1,1 @@
+ES_JAVA_OPTS="-Djna.tmpdir=/var/lib/elasticsearch/tmp"
