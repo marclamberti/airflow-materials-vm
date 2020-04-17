@@ -4,7 +4,7 @@
 
 source "/vagrant/scripts/common.sh"
 
-function setupMaterials {
+function setupSqlite {
     echo "setup sqlite3"
     apt-get -y update
     apt-get install sqlite3
