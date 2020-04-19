@@ -59,6 +59,9 @@ KIBANA_CONF_DIR=/etc/kibana/
 ERLANG_ARCHIVE=esl-erlang_$ERLANG_VERSION~ubuntu~xenial_amd64.deb
 ERLANG_MIRROR_DOWNLOAD=https://packages.erlang-solutions.com/erlang/debian/pool/esl-erlang_$ERLANG_VERSION~ubuntu~xenial_amd64.deb
 
+# virtualenv
+VENV_RES_DIR=vagrant/resources/virtualenv
+
 # ssh
 SSH_RES_DIR=/vagrant/resources/ssh
 RES_SSH_COPYID_ORIGINAL=$SSH_RES_DIR/ssh-copy-id.original
