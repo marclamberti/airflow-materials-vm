@@ -9,7 +9,7 @@ LOCAL_DIR='/tmp/'
 
 def main():
 	# Create the dataframe from data.csv
-	tweets = pd.read_csv('/home/airflow/airflow/dags/data/data.csv', encoding='latin1')
+	tweets = pd.read_csv('/home/vagrant/airflow/dags/data/data.csv', encoding='latin1')
 
 	# Fomat time using pd.to_datetime and drop the column Row ID
 	tweets = tweets.assign(Time=pd.to_datetime(tweets.Time)).drop('row ID', axis='columns')

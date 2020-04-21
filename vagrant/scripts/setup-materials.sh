@@ -9,6 +9,7 @@ function setupMaterials {
     cp -f /vagrant/resources/materials/update_materials.sh /home/vagrant
     chmod +x /home/vagrant/update_materials.sh
     /home/vagrant/update_materials.sh
+    chmod +x /home/vagrant/airflow-materials/data-pipelines/clean.sh
 }
 
 echo "setup materials"
