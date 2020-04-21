@@ -38,8 +38,8 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
         node.vm.provision :shell, path: 'scripts/setup-kibana.sh'
         node.vm.provision :shell, path: 'scripts/setup-rabbitmq.sh'
         node.vm.provision :shell, path: 'scripts/setup-mysql.sh'
-        node.vm.provision :shell, path: 'scripts/setup-virtualenv.sh'
         node.vm.provision :shell, path: 'scripts/setup-materials.sh'
+        node.vm.provision :shell, path: 'scripts/setup-virtualenv.sh'
         node.vm.provision :shell, path: 'scripts/setup-sqlite3.sh'
 	# Optional components - uncomment to include
         node.vm.provision :shell, path: 'scripts/finalize-ubuntu.sh'
