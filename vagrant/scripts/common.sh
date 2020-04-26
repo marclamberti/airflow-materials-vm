@@ -71,8 +71,9 @@ RES_SSH_CONFIG=$SSH_RES_DIR/config
 # vim
 VIM_RES_DIR=/vagrant/resources/vim
 
-# root password for mysql
+# passwords for mysql
 MYSQL_ROOT_PASSWORD=root
+MYSQL_AIRFLOW_PASSWORD=airflow
 
 # Zeppelin 
 ZEPPELIN_RELEASE=zeppelin-${ZEPPELIN_VERSION}-bin-netinst

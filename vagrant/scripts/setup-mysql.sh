@@ -54,6 +54,9 @@ function setupMysql {
     echo "CREATE USER 'airflow'@'%' IDENTIFIED BY 'airflow';" | mysql -u root -P 3306 -p${MYSQL_ROOT_PASSWORD}
     echo "grant permissions to airflow user..."
 	echo "GRANT ALL PRIVILEGES ON airflow_mdb.* TO 'airflow'@'%' IDENTIFIED BY 'airflow';" | mysql -u root -P 3306 -p${MYSQL_ROOT_PASSWORD}
+    echo "Create tables for airflow_mdb..."
+    mysql -u airflow -P 3306 -p${MYSQL_AIRFLOW_PASSWORD} -D airflow_mdb < /home/vagrant/airflow-materials/data-pipelines/mysql_table_tasks.sql 
+    mysql -u airflow -P 3306 -p${MYSQL_AIRFLOW_PASSWORD} -D airflow_mdb < /home/vagrant/airflow-materials/data-pipelines/mysql_table_sources.sql 
     echo "Restarting mysqld for changes to take effect..."
 #	systemctl restart mysql.service
 	service mysql restart

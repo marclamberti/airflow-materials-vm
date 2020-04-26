@@ -22,7 +22,7 @@ with DAG('dynamic_dag',
 		task_id='opr_insert_' + str(counter)
 		task_date=dt.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
 		opr_insert = MySqlOperator(task_id=task_id, 
-						sql="INSERT INTO local_executor.task (id, timestamp) VALUES ('" + task_id + "_" + task_date  + "', '" + task_date + "');", 
+						sql="INSERT INTO tasks (id, timestamp) VALUES ('" + task_id + "_" + task_date  + "', '" + task_date + "');", 
 						mysql_conn_id='mysql',
 						autocommit=True,
 						database='airflow_mdb')

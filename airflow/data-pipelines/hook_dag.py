@@ -1,7 +1,7 @@
 from datetime import datetime, timedelta
 
 from airflow import DAG
-from airflow.hooks.postgres_hook import PostgresHook
+from airflow.hooks.mysql_hook import MySqlHook
 from airflow.operators.dummy_operator import DummyOperator
 from airflow.operators.python_operator import PythonOperator
 
@@ -14,10 +14,10 @@ default_args = {
 }
 
 def get_activated_sources():
-	request = "SELECT * FROM course.source"
-	pg_hook = PostgresHook(postgres_conn_id="postgre_sql", schema="airflow_mdb") # This connection must be set from the Connection view in Airflow UI
-	connection = pg_hook.get_conn() # Gets the connection from PostgreHook
-	cursor = connection.cursor() # Gets a cursor to the postgreSQL database. Look at https://www.postgresql.org/docs/9.2/plpgsql-cursors.html for more information
+	request = "SELECT * FROM sources"
+	mysql_hook = MySqlHook(mysql_conn_id="mysql", schema="airflow_mdb") # This connection must be set from the Connection view in Airflow UI
+	connection = mysql_hook.get_conn() # Gets the connection from MySqlHook
+	cursor = connection.cursor() # Gets a cursor 
 	cursor.execute(request) # Executes the request
 	sources = cursor.fetchall() # Fetchs all the data from the executed request
 	for source in sources: # Does a simple print of each source to show that the hook works well. More on the next lesson
