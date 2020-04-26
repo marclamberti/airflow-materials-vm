@@ -2,7 +2,7 @@ import datetime as dt
 
 from airflow import DAG
 from airflow.operators.bash_operator import BashOperator
-from airflow.operators.postgres_operator import PostgresOperator
+from airflow.operators.mysql_operator import MySqlOperator
 
 default_args = {
 	'owner': 'airflow',
@@ -21,9 +21,9 @@ with DAG('dynamic_dag',
 	for counter in range(1, 4):
 		task_id='opr_insert_' + str(counter)
 		task_date=dt.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-		opr_insert = PostgresOperator(task_id=task_id, 
+		opr_insert = MySqlOperator(task_id=task_id, 
 						sql="INSERT INTO local_executor.task (id, timestamp) VALUES ('" + task_id + "_" + task_date  + "', '" + task_date + "');", 
-						postgres_conn_id='postgres_sql',
+						mysql_conn_id='mysql',
 						autocommit=True,
 						database='airflow_mdb')
 		opr_insert >> opr_end

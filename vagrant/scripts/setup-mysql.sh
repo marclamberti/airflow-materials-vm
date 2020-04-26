@@ -48,7 +48,13 @@ function setupMysql {
 	echo "CREATE USER 'hive'@'%' IDENTIFIED BY 'hive';" | mysql -u root -P 3306 -p${MYSQL_ROOT_PASSWORD}
 	echo "grant permissions to hive meta-db user..."
 	echo "GRANT ALL PRIVILEGES ON hive_metastore.* TO 'hive'@'%' IDENTIFIED BY 'hive';" | mysql -u root -P 3306 -p${MYSQL_ROOT_PASSWORD}
-	echo "Restarting mysqld for changes to take effect..."
+	echo "Create airflow_mdb schema..."	
+    echo "CREATE SCHEMA airflow_mdb;" | mysql -u root -P 3306 -p${MYSQL_ROOT_PASSWORD}
+    echo "Create airflow user..."
+    echo "CREATE USER 'airflow'@'%' IDENTIFIED BY 'airflow';" | mysql -u root -P 3306 -p${MYSQL_ROOT_PASSWORD}
+    echo "grant permissions to airflow user..."
+	echo "GRANT ALL PRIVILEGES ON airflow_mdb.* TO 'airflow'@'%' IDENTIFIED BY 'airflow';" | mysql -u root -P 3306 -p${MYSQL_ROOT_PASSWORD}
+    echo "Restarting mysqld for changes to take effect..."
 #	systemctl restart mysql.service
 	service mysql restart
 	echo "setup of mysql finished"
