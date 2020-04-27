@@ -1,7 +1,7 @@
 from datetime import datetime, timedelta
 
 from airflow import DAG
-from airflow.hooks.postgres_hook import PostgresHook
+from airflow.hooks.mysql_hook import MySqlHook
 from airflow.operators.dummy_operator import DummyOperator
 from airflow.operators.python_operator import PythonOperator
 
@@ -13,12 +13,12 @@ default_args = {
 	'retry_delay': timedelta(minutes=1)
 }
 
-# Read the table course.source to fetch the data and return the name of first source having its column "activated" sets to true
+# Read the table sources to fetch the data and return the name of first source having its column "activated" sets to true
 # No need to call xcom_push here since we use the keyword "return" which has the same effect.
 def get_activated_sources():
-	request = "SELECT * FROM course.source"
-	pg_hook = PostgresHook(postgres_conn_id="postgre_sql", schema="airflow_mdb")
-	connection = pg_hook.get_conn()
+	request = "SELECT * FROM sources"
+	mysql_hook = MySqlHook(mysql_conn_id="mysql", schema="airflow_mdb")
+	connection = mysql_hook.get_conn()
 	cursor = connection.cursor()
 	cursor.execute(request)
 	sources = cursor.fetchall()

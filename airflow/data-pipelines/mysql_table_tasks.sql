@@ -1,4 +1,4 @@
 CREATE TABLE tasks(
-    id INT(6),
+    id VARCHAR(100),
     timestamp TIMESTAMP
 );

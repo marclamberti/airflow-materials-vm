@@ -42,7 +42,8 @@ function setupMysql {
 	# Allow root access from host
 	echo "Allow root access from network..."
 	echo "GRANT ALL PRIVILEGES ON *.* TO 'root'@'%' IDENTIFIED BY '${MYSQL_ROOT_PASSWORD}';" | mysql -u root -P 3306 -p${MYSQL_ROOT_PASSWORD}
-	echo "Create hive_metastore schema..."
+	echo "SET GLOBAL explicit_defaults_for_timestamp = 1;" | mysql -u root -P 3306 -p${MYSQL_ROOT_PASSWORD}
+    echo "Create hive_metastore schema..."
 	echo "CREATE SCHEMA hive_metastore;" | mysql -u root -P 3306 -p${MYSQL_ROOT_PASSWORD}
 	echo "Create hive meta-db user..."
 	echo "CREATE USER 'hive'@'%' IDENTIFIED BY 'hive';" | mysql -u root -P 3306 -p${MYSQL_ROOT_PASSWORD}
