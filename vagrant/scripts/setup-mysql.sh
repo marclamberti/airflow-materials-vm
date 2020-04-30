@@ -42,7 +42,6 @@ function setupMysql {
 	# Allow root access from host
 	echo "Allow root access from network..."
 	echo "GRANT ALL PRIVILEGES ON *.* TO 'root'@'%' IDENTIFIED BY '${MYSQL_ROOT_PASSWORD}';" | mysql -u root -P 3306 -p${MYSQL_ROOT_PASSWORD}
-	echo "SET GLOBAL explicit_defaults_for_timestamp = 1;" | mysql -u root -P 3306 -p${MYSQL_ROOT_PASSWORD}
     echo "Create hive_metastore schema..."
 	echo "CREATE SCHEMA hive_metastore;" | mysql -u root -P 3306 -p${MYSQL_ROOT_PASSWORD}
 	echo "Create hive meta-db user..."
@@ -58,6 +57,7 @@ function setupMysql {
     echo "Create tables for airflow_mdb..."
     mysql -u airflow -P 3306 -p${MYSQL_AIRFLOW_PASSWORD} -D airflow_mdb < /home/vagrant/airflow-materials/data-pipelines/mysql_table_tasks.sql 
     mysql -u airflow -P 3306 -p${MYSQL_AIRFLOW_PASSWORD} -D airflow_mdb < /home/vagrant/airflow-materials/data-pipelines/mysql_table_sources.sql 
+    	echo "SET GLOBAL explicit_defaults_for_timestamp = 1;" | mysql -u root -P 3306 -p${MYSQL_ROOT_PASSWORD}
     echo "Restarting mysqld for changes to take effect..."
 #	systemctl restart mysql.service
 	service mysql restart

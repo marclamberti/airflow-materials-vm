@@ -1,7 +1,7 @@
 from datetime import datetime, timedelta
 
 from airflow import DAG
-from airflow.hooks.postgres_hook import PostgresHook
+from airflow.hooks.mysql_hook import MySqlHook
 from airflow.operators.dummy_operator import DummyOperator
 from airflow.operators.python_operator import PythonOperator
 from airflow.operators.python_operator import BranchPythonOperator
@@ -16,9 +16,9 @@ default_args = {
 }
 
 def get_activated_sources():
-	request = "SELECT * FROM course.source"
-	pg_hook = PostgresHook(postgre_conn_id="postgre_sql", schema="airflow_mdb")
-	connection = pg_hook.get_conn()
+	request = "SELECT * FROM sources"
+	mysql_hook = MySqlHook(mysql_conn_id="mysql", schema="airflow_mdb")
+	connection = mysql_hook.get_conn()
 	cursor = connection.cursor()
 	cursor.execute(request)
 	sources = cursor.fetchall()
@@ -41,14 +41,14 @@ with DAG('branch_dag',
 	default_args=default_args,
 	schedule_interval='@once') as dag:
 
-	start_task 	= DummyOperator(task_id='start_task')
-	hook_task 	= PythonOperator(task_id='hook_task', python_callable=get_activated_sources)
-	xcom_task 	= PythonOperator(task_id='xcom_task', python_callable=source_to_use, provide_context=True)
+	start_task 	    = DummyOperator(task_id='start_task')
+	hook_task 	    = PythonOperator(task_id='hook_task', python_callable=get_activated_sources)
+	xcom_task 	    = PythonOperator(task_id='xcom_task', python_callable=source_to_use, provide_context=True)
 	branch_task 	= BranchPythonOperator(task_id='branch_task', python_callable=check_for_activated_source, provide_context=True)
-	mysql_task 	= BashOperator(task_id='mysql', bash_command='echo "MYSQL is activated"')
+	mysql_task 	    = BashOperator(task_id='mysql', bash_command='echo "MYSQL is activated"')
 	postgresql_task = BashOperator(task_id='postgresql', bash_command='echo "PostgreSQL is activated"')
-	s3_task 	= BashOperator(task_id='s3', bash_command='echo "S3 is activated"')
-	mongo_task 	= BashOperator(task_id='mongo', bash_command='echo "Mongo is activated"')
+	s3_task 	    = BashOperator(task_id='s3', bash_command='echo "S3 is activated"')
+	mongo_task 	    = BashOperator(task_id='mongo', bash_command='echo "Mongo is activated"')
 	
 	start_task >> hook_task >> xcom_task >> branch_task
 	branch_task >> mysql_task

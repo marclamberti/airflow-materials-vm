@@ -10,7 +10,7 @@ def log_sla_miss(dag, task_list, blocking_task_list, slas, blocking_tis):
 default_args = {
     'owner': 'airflow',
     'depends_on_past': False,
-    'start_date': datetime(2019, 2, 4, 23, 15, 0),
+    'start_date': datetime(2020, 1, 1, 23, 15, 0),
     'email': None,
     'email_on_failure': False,
     'email_on_retry': False,

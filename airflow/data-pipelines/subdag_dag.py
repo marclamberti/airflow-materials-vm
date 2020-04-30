@@ -10,8 +10,8 @@ SUBDAG_DAG_NAME='subdag'
 
 with DAG(
 	dag_id=PARENT_DAG_NAME,
-	schedule_interval='*/10 * * * *',
-	start_date=datetime(2018, 11, 5, 10, 00, 00),
+	schedule_interval='@daily',
+	start_date=datetime(2020, 1, 1, 10, 00, 00),
 	catchup=False
 ) as dag:
 	start_task = DummyOperator(task_id='start')	
