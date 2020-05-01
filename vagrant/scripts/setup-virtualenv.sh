@@ -9,6 +9,8 @@ function installVenv {
     apt-get -y install libreadline-gplv2-dev libncursesw5-dev libssl-dev libsqlite3-dev tk-dev libgdbm-dev libc6-dev libbz2-dev
     apt-get -y install libmysqlclient-dev
     apt-get -y install liblzma-dev
+    apt-get -y install tree
+    apt-get -y install libpq-dev python-dev
     cd /usr/src
     wget https://www.python.org/ftp/python/3.5.6/Python-3.5.6.tgz
     tar xzf Python-3.5.6.tgz
@@ -17,6 +19,8 @@ function installVenv {
     make altinstall
     cd /home/vagrant
     pip install --upgrade pip
+    pip install elasticsearch==7.6.0
+    pip install psycopg2==2.8.5
     python3.5 -m venv .sandbox
     chmod +x .sandbox/bin/activate
     chown -R vagrant: . 
