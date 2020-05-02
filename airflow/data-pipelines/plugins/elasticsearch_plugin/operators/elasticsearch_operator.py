@@ -1,4 +1,5 @@
 import json
+import MySQLdb
 from airflow.models import BaseOperator
 from psycopg2.extras import RealDictCursor
 
@@ -40,7 +41,7 @@ class MySqlToElasticsearchTransfer(BaseOperator):
 
 		self.log.info("Extracting data from MySQL: %s", self.sql)
 
-		with mysql.cursor(buffered=True, dictionary=True) as mysql_cursor:
+		with MySQLdb.cursors.DictCursor(mysql) as mysql_cursor:
 			mysql_cursor.execute(self.sql)
 			for row in mysql_cursor:
 				doc = json.dumps(row, indent=2)
