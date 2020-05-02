@@ -42,6 +42,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
         node.vm.provision :shell, path: 'scripts/setup-mysql.sh'
         node.vm.provision :shell, path: 'scripts/setup-virtualenv.sh'
         node.vm.provision :shell, path: 'scripts/setup-sqlite3.sh'
+        node.vm.provision :shell, path: 'scripts/setup-docker.sh'
 	# Optional components - uncomment to include
         node.vm.provision :shell, path: 'scripts/finalize-ubuntu.sh'
         node.vm.provision :shell, path: 'scripts/bootstrap.sh', run: 'always'

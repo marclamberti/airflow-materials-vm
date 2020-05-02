@@ -4,7 +4,7 @@ from airflow import DAG
 from airflow.operators.bash_operator import BashOperator
 from airflow.operators.python_operator import PythonOperator
 from airflow.hooks.elasticsearch_plugin import ElasticsearchHook
-from airflow.operators.elasticsearch_plugin import PostgresToElasticsearchTransfer
+from airflow.operators.elasticsearch_plugin import MySqlToElasticsearchTransfer
 
 default_args = {
         'owner': 'airflow',
@@ -19,6 +19,6 @@ with DAG('plugin_operator_dag',
 	catchup=False
 	) as dag:
 	
-	opr_transfer = PostgresToElasticsearchTransfer(task_id='postgres_to_es', sql='SELECT * FROM course.source', index='sources', postgres_conn_id="postgres_sql")
+	opr_transfer = MySqlToElasticsearchTransfer(task_id='mysql_to_es', sql='SELECT * FROM sources', index='sources', postgres_conn_id="mysql")
 	opr_end = BashOperator(task_id='opr_end', bash_command='echo "Done"')
 	opr_transfer >> opr_end
