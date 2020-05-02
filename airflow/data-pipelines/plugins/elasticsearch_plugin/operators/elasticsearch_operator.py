@@ -40,10 +40,8 @@ class MySqlToElasticsearchTransfer(BaseOperator):
 
 		self.log.info("Extracting data from MySQL: %s", self.sql)
 
-		with mysql.cursor(name="serverCursor", cursor_factory=RealDictCursor) as mysql_cursor:
-			mysql_cursor.itersize=2000
+		with mysql.cursor(buffered=True, dictionary=True) as mysql_cursor:
 			mysql_cursor.execute(self.sql)
 			for row in mysql_cursor:
 				doc = json.dumps(row, indent=2)
 				es.add_doc(index=self.index, doc_type='external', doc=doc)
-		mysql.close()
