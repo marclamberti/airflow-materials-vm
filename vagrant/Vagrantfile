@@ -14,7 +14,8 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     end
     config.vm.provider "virtualbox" do |v, override|
 	    override.vm.box = "ubuntu/xenial64"
-	    v.gui = false
+	    override.disksize.size = "20GB"
+        v.gui = false
 	    v.name = "learnairflow"
             v.customize ['modifyvm', :id, '--memory', '8192']
     end
