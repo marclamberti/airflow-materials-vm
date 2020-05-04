@@ -6,7 +6,7 @@ from airflow.operators.postgres_operator import PostgresOperator
 
 default_args = {
 	'owner': 'airflow',
-	'start_date': dt.datetime(2018, 10, 25, 11, 30, 00),
+	'start_date': dt.datetime(2020, 1, 1, 11, 30, 00),
 	'retries': 0
 }
 
