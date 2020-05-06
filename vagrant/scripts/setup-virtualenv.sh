@@ -18,12 +18,13 @@ function installVenv {
     ./configure --enable-optimizations
     make altinstall
     cd /home/vagrant
-    pip install --upgrade pip
-    pip install elasticsearch==7.6.0
-    pip install psycopg2==2.8.5
     python3.5 -m venv .sandbox
     chmod +x .sandbox/bin/activate
     chown -R vagrant: . 
+    source .sandbox/bin/activate
+    pip install --upgrade pip
+    pip install elasticsearch==7.6.0
+    pip install psycopg2==2.8.5
 }
 
 function setupEnvVars {
