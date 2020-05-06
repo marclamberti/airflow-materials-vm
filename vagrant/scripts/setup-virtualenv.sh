@@ -25,6 +25,7 @@ function installVenv {
     pip install --upgrade pip
     pip install elasticsearch==7.6.0
     pip install psycopg2==2.8.5
+    deactivate
 }
 
 function setupEnvVars {
