@@ -19,6 +19,6 @@ with DAG('plugin_operator_dag',
 	catchup=False
 	) as dag:
 	
-	opr_transfer = MySqlToElasticsearchTransfer(task_id='mysql_to_es', sql='SELECT * FROM sources', index='sources', postgres_conn_id="mysql")
+	opr_transfer = MySqlToElasticsearchTransfer(task_id='mysql_to_es', sql='SELECT * FROM sources', index='sources', mysql_conn_id="mysql")
 	opr_end = BashOperator(task_id='opr_end', bash_command='echo "Done"')
 	opr_transfer >> opr_end

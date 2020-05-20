@@ -17,7 +17,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 	    override.disksize.size = "20GB"
         v.gui = false
 	    v.name = "learnairflow"
-            v.customize ['modifyvm', :id, '--memory', '8192']
+            v.customize ['modifyvm', :id, '--memory', '7192']
     end
     config.vm.network "forwarded_port", guest: 8082, host: 8082
     config.vm.network "forwarded_port", guest: 8088, host: 8088
