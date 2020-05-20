@@ -35,10 +35,8 @@ EOF
 }
 
 function setupMysql {
-	echo "Edit bind-address in mysqld.cnf..."
-	# bind mysql to all addresses to allow host access.
-	cp /etc/mysql/mysql.conf.d/mysqld.cnf /etc/mysql/mysql.conf.d/mysqld.cnf.old
-	sed -e's/^bind-address/#bind-address/' /etc/mysql/mysql.conf.d/mysqld.cnf.old > /etc/mysql/mysql.conf.d/mysqld.cnf
+	echo "Edit mysqld.cnf..."
+	cp -f /vagrant/resources/mysql/$MYSQL_CONF ${MYSQL_CONF_DIR}
 	# Allow root access from host
 	echo "Allow root access from network..."
 	echo "GRANT ALL PRIVILEGES ON *.* TO 'root'@'%' IDENTIFIED BY '${MYSQL_ROOT_PASSWORD}';" | mysql -u root -P 3306 -p${MYSQL_ROOT_PASSWORD}
