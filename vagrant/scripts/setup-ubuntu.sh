@@ -1,7 +1,7 @@
 #!/bin/bash
 # https://docs.vagrantup.com/v2/provisioning/shell.html
 
-source "/vagrant/scripts/common.sh"
+source "/vagrant/scripts/common.sh" || source "/home/vagrant/vagrant-scripts/common.sh"
 
 function setupHosts {
 	echo "modifying /etc/hosts file"

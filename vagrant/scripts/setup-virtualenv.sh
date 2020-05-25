@@ -2,7 +2,7 @@
 
 # http://www.cloudera.com/content/cloudera/en/documentation/core/v5-2-x/topics/cdh_ig_spark_configure.html
 
-source "/vagrant/scripts/common.sh"
+source "/vagrant/scripts/common.sh" || source "/home/vagrant/vagrant-scripts/common.sh"
 
 function installVenv {
     apt-get -y install build-essential checkinstall

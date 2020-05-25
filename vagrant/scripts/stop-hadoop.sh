@@ -1,6 +1,6 @@
 #!/bin/bash
 
-source "/vagrant/scripts/common.sh"
+source "/vagrant/scripts/common.sh" || source "/home/vagrant/vagrant-scripts/common.sh"
 
 function stopDaemons {
     echo "stopping Hadoop daemons"

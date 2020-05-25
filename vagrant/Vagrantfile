@@ -19,6 +19,8 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 	    v.name = "learnairflow"
             v.customize ['modifyvm', :id, '--memory', '7192']
     end
+    config.vm.provision "file", source: "scripts", destination: "$HOME/vagrant-scripts"
+    config.vm.provision :shell, :inline => "sudo sed -i 's/PasswordAuthentication no/PasswordAuthentication yes/g' /etc/ssh/sshd_config; sudo systemctl restart sshd;", run: "always"
     config.vm.network "forwarded_port", guest: 8082, host: 8082
     config.vm.network "forwarded_port", guest: 8088, host: 8088
     config.vm.network "forwarded_port", guest: 9083, host: 9083
@@ -39,13 +41,13 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
         node.vm.provision :shell, path: 'scripts/setup-es.sh'
         node.vm.provision :shell, path: 'scripts/setup-kibana.sh'
         node.vm.provision :shell, path: 'scripts/setup-rabbitmq.sh'
-        node.vm.provision :shell, path: 'scripts/setup-materials.sh'
         node.vm.provision :shell, path: 'scripts/setup-mysql.sh'
         node.vm.provision :shell, path: 'scripts/setup-virtualenv.sh'
         node.vm.provision :shell, path: 'scripts/setup-sqlite3.sh'
         node.vm.provision :shell, path: 'scripts/setup-docker.sh'
+        node.vm.provision :shell, path: 'scripts/setup-materials.sh'
 	# Optional components - uncomment to include
         node.vm.provision :shell, path: 'scripts/finalize-ubuntu.sh'
-        node.vm.provision :shell, path: 'scripts/bootstrap.sh', run: 'always'
+        #node.vm.provision :shell, path: 'scripts/bootstrap.sh', run: 'always'
     end
 end

@@ -2,7 +2,7 @@
 
 # https://hadoop.apache.org/docs/r2.4.1/hadoop-yarn/hadoop-yarn-common/yarn-default.xml
 
-source "/vagrant/scripts/common.sh"
+source "/vagrant/scripts/common.sh" || source "/home/vagrant/vagrant-scripts/common.sh"
 
 function installLocalHadoop {
 	echo "install hadoop from local file"
