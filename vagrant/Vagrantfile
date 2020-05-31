@@ -21,15 +21,16 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     end
     config.vm.provision "file", source: "scripts", destination: "$HOME/vagrant-scripts"
     config.vm.provision :shell, :inline => "sudo sed -i 's/PasswordAuthentication no/PasswordAuthentication yes/g' /etc/ssh/sshd_config; sudo systemctl restart sshd;", run: "always"
-    config.vm.network "forwarded_port", guest: 8082, host: 8082
-    config.vm.network "forwarded_port", guest: 8088, host: 8088
-    config.vm.network "forwarded_port", guest: 9083, host: 9083
-    config.vm.network "forwarded_port", guest: 4040, host: 4040
-    config.vm.network "forwarded_port", guest: 18888, host: 18888
-    config.vm.network "forwarded_port", guest: 9200, host: 9200
-    config.vm.network "forwarded_port", guest: 5601, host: 5601
-    config.vm.network "forwarded_port", guest: 15672, host: 15672
-    config.vm.network "forwarded_port", guest: 5555, host: 5555
+    config.vm.network "forwarded_port", guest: 8080, host: 8080, host_ip: '10.211.55.101'
+    config.vm.network "forwarded_port", guest: 8082, host: 8082, host_ip: '10.211.55.101'
+    config.vm.network "forwarded_port", guest: 8088, host: 8088, host_ip: '10.211.55.101'
+    config.vm.network "forwarded_port", guest: 9083, host: 9083, host_ip: '10.211.55.101'
+    config.vm.network "forwarded_port", guest: 4040, host: 4040, host_ip: '10.211.55.101'
+    config.vm.network "forwarded_port", guest: 18888, host: 18888, host_ip: '10.211.55.101'
+    config.vm.network "forwarded_port", guest: 9200, host: 9200, host_ip: '10.211.55.101'
+    config.vm.network "forwarded_port", guest: 5601, host: 5601, host_ip: '10.211.55.101'
+    config.vm.network "forwarded_port", guest: 15672, host: 15672, host_ip: '10.211.55.101'
+    config.vm.network "forwarded_port", guest: 5555, host: 5555, host_ip: '10.211.55.101'
     config.vm.define "learnairflow" do |node|
         node.vm.network :private_network, ip: '10.211.55.101'
         node.vm.hostname = 'learnairflow'
