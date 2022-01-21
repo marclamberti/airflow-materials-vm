@@ -149,7 +149,7 @@ importlib-resources==1.4.0
 inflection==0.4.0
 ipdb==0.13.2
 ipython-genutils==0.2.0
-ipython==7.9.0
+ipython==7.16.3
 iso8601==0.1.12
 isodate==0.6.0
 itsdangerous==1.1.0
