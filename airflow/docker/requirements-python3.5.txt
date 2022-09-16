@@ -14,7 +14,7 @@ Flask==1.1.2
 JPype1==0.7.1
 JayDeBeApi==1.1.1
 Jinja2==2.10.3
-Mako==1.1.2
+Mako==1.2.2
 Markdown==2.6.11
 MarkupSafe==1.1.1
 PyHive==0.6.2
